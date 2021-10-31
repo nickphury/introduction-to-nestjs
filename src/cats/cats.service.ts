@@ -14,16 +14,6 @@ export class CatsService {
       breed: 'rrrrrrrrrr',
       name: 'ben',
     },
-    {
-      age: 1,
-      breed: 'rrrrrrrrrr',
-      name: 'ben',
-    },
-    {
-      age: 4,
-      breed: 'rrrrrrrrrr',
-      name: 'ben',
-    },
   ];
 
   create(cat: Cat) {
