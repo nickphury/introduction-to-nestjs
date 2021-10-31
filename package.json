@@ -18,12 +18,14 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "generate-openapi": "openapi-generator-cli generate -i src/services/swagger/swagger.yaml -g typescript-nestjs -o src/services/generated --additional-properties=supportsES6=true,npmName=restClient,npmVersion=8.0.0"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.6",
     "@nestjs/core": "^8.0.6",
     "@nestjs/platform-express": "^8.0.0",
+    "@openapitools/openapi-generator-cli": "^2.4.13",
     "@types/joi": "^17.2.3",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
