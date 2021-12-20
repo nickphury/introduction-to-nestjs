@@ -8,8 +8,8 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  async create(cat: UserDao) {
-    // this.cats.push(cat);
+  async create(user: UserDao) {
+    this.userService.create(user);
   }
 
   @Get()
