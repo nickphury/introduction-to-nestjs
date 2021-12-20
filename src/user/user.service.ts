@@ -3,8 +3,8 @@ import { UserDao } from './interfaces/user.interface';
 
 @Injectable()
 export class UserService {
-  create(cat: UserDao) {
-    // this.cats.push(cat);
+  create(user: UserDao) {
+    console.warn('object : ', user);
   }
 
   findAll(): UserDao[] {
