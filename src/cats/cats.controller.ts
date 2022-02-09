@@ -27,18 +27,15 @@ export class CatsController {
   @Roles('admin')
   async create(@Body(new ValidationPipe()) createCatDto: CreateCatDto) {
     this.catsService.create(createCatDto);
-    throw new ForbiddenException();
   }
 
   @Get()
   async findAll(): Promise<Cat[]> {
     return this.catsService.findAll();
-    // console.warn('object');
-    // throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
   }
 
-  @Get(':uuid')
-  async findOne(@Param('uuid', ParseUUIDPipe) uuid: string) {
-    return this.catsService.findOne(uuid);
+  @Get(':id')
+  async findOne(id: string) {
+    return this.catsService.findOne(id);
   }
 }
