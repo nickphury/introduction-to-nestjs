@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Post,
+} from '@nestjs/common';
 import { User } from 'src/decorator/user.decorator';
 import { UserDao } from './interfaces/user.interface';
 import { UserService } from './user.service';
@@ -17,8 +25,13 @@ export class UserController {
     return await this.userService.findAll();
   }
 
-  @Get(':firstName')
-  async findOne(@Param('firstName') @User('firstName') firstName: string) {
-    return await this.userService.findOne(firstName);
+  @Get(':uuid')
+  async findOne(@Param('uuid', new ParseUUIDPipe()) uuid: string) {
+    return await this.userService.findOne(uuid);
+  }
+
+  @Delete(':uuid')
+  async delete(@Param('uuid', new ParseUUIDPipe()) uuid: string) {
+    return await this.userService.delete(uuid);
   }
 }

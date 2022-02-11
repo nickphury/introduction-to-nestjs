@@ -11,6 +11,7 @@ import { CatsController } from './cats/cats.controller';
 import { CatsModule } from './cats/cats.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { ConfigModule } from './services/config/config.module';
+import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
 @Module({
   imports: [CatsModule, UserModule, ConfigModule, TypeOrmModule.forRoot()],
@@ -26,6 +27,6 @@ export class AppModule implements NestModule {
         { path: 'cats', method: RequestMethod.POST },
         'cats/(.*)',
       )
-      .forRoutes(CatsController);
+      .forRoutes(CatsController, UserController);
   }
 }

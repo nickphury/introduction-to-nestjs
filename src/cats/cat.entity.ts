@@ -1,17 +1,13 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class User {
+export class Cat {
   @PrimaryGeneratedColumn('uuid')
   id: string;
   @Column()
-  firstName: string;
+  name: string;
   @Column()
-  lastName: string;
+  age: number;
   @Column()
-  email: string;
-  @Column()
-  tel: string;
-  @Column({ default: true })
-  isActive: boolean;
+  breed: string;
 }

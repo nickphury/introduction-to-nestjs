@@ -6,10 +6,12 @@ import {
 } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { validate } from 'class-validator';
+import { CatDto } from 'src/cats/dto/create-cat.dto';
 
 @Injectable()
 export class ValidationPipe implements PipeTransform {
   async transform(value: any, { metatype }: ArgumentMetadata) {
+    console.warn('object : ', metatype);
     if (!metatype || !this.toValidate(metatype)) {
       return value;
     }
@@ -22,7 +24,7 @@ export class ValidationPipe implements PipeTransform {
   }
 
   private toValidate(metatype: unknown): boolean {
-    const types: unknown[] = [String, Boolean, Number, Array, Object];
+    const types: unknown[] = [CatDto];
     return !types.includes(metatype);
   }
 }
