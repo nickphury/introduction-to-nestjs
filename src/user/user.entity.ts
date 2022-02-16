@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Cat } from 'src/cats/cat.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -14,4 +15,6 @@ export class User {
   tel: string;
   @Column({ default: true })
   isActive: boolean;
+  @OneToMany(() => Cat, (cat) => cat.user)
+  cats: Cat[];
 }

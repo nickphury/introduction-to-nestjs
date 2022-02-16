@@ -13,11 +13,11 @@ export class CatsService {
   }
 
   findAll(): Promise<Cat[]> {
-    return this.catRepository.find();
+    return this.catRepository.find({ relations: ['user'] });
   }
 
   findOne(id: string): Promise<Cat> {
-    return this.catRepository.findOne(id);
+    return this.catRepository.findOne(id, { relations: ['user'] });
   }
 
   async delete(id: string): Promise<void> {
