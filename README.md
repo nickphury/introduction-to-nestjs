@@ -63,15 +63,15 @@ $ npm run test:cov
 ## .env
 
 ```diff
-+ NODE_ENV=development
-+ PORT=3000
+ NODE_ENV=development
+ PORT=3000
 ```
 
 ## connection to SQL database
 
 In this application, i use mysql as DBMS
 
-```bash
+```diff
 TYPEORM_CONNECTION = mysql
 TYPEORM_HOST = localhost
 TYPEORM_USERNAME = tutorials
