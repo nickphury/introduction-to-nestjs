@@ -58,16 +58,29 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## Environment variable storage in .env file
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## .env
 
-## Stay in touch
+```diff
++ NODE_ENV=development
++ PORT=3000
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## connection to SQL database
 
-## License
+In this application, i use mysql as DBMS
+
+```diff
++ TYPEORM_CONNECTION = mysql
++ TYPEORM_HOST = localhost
++ TYPEORM_USERNAME = tutorials
++ TYPEORM_PASSWORD = ******
++ TYPEORM_DATABASE = data_base_name
++ TYPEORM_PORT = 3306
++ TYPEORM_SYNCHRONIZE = true
++ TYPEORM_LOGGING = true
++ TYPEORM_ENTITIES = dist/**/*.entity.js,dist/**/*.entity.ts
+```
 
 Nest is [MIT licensed](LICENSE).
