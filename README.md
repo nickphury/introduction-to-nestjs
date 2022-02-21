@@ -71,16 +71,16 @@ $ npm run test:cov
 
 In this application, i use mysql as DBMS
 
-```diff
-+ TYPEORM_CONNECTION = mysql
-+ TYPEORM_HOST = localhost
-+ TYPEORM_USERNAME = tutorials
-+ TYPEORM_PASSWORD = ******
-+ TYPEORM_DATABASE = data_base_name
-+ TYPEORM_PORT = 3306
-+ TYPEORM_SYNCHRONIZE = true
-+ TYPEORM_LOGGING = true
-+ TYPEORM_ENTITIES = dist/**/*.entity.js,dist/**/*.entity.ts
+```bash
+TYPEORM_CONNECTION = mysql
+TYPEORM_HOST = localhost
+TYPEORM_USERNAME = tutorials
+TYPEORM_PASSWORD = ******
+TYPEORM_DATABASE = data_base_name
+TYPEORM_PORT = 3306
+TYPEORM_SYNCHRONIZE = true
+TYPEORM_LOGGING = true
+TYPEORM_ENTITIES = dist/**/*.entity.js,dist/**/*.entity.ts
 ```
 
 Nest is [MIT licensed](LICENSE).
