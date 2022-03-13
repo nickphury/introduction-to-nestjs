@@ -10,7 +10,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { CatsService } from 'src/cats/cats.service';
-import { CatDto } from 'src/cats/dto/create-cat.dto';
+import { CatDto } from 'src/cats/dto/cat.dto';
 import { Roles } from 'src/decorators/roles.decorator';
 import { RolesGuard } from 'src/guards/roles.guard';
 import { LoggingInterceptor } from 'src/interceptors/logging.interceptor';

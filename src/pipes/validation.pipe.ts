@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { validate } from 'class-validator';
-import { CatDto } from 'src/cats/dto/create-cat.dto';
+import { CatDto } from 'src/cats/dto/cat.dto';
 
 @Injectable()
 export class ValidationPipe implements PipeTransform {
