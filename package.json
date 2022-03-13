@@ -22,20 +22,24 @@
     "generate-openapi": "openapi-generator-cli generate -i src/services/swagger/swagger.yaml -g typescript-nestjs -o src/services/generated --additional-properties=supportsES6=true,npmName=restClient,npmVersion=8.0.0"
   },
   "dependencies": {
-    "@nestjs/common": "^8.0.6",
-    "@nestjs/core": "^8.0.6",
-    "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/common": "^8.2.5",
+    "@nestjs/config": "^1.2.0",
+    "@nestjs/core": "^8.2.5",
+    "@nestjs/platform-express": "^8.2.5",
+    "@nestjs/typeorm": "^8.0.3",
     "@openapitools/openapi-generator-cli": "^2.4.13",
-    "@types/joi": "^17.2.3",
+    "axios": "^0.24.0",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "dotenv": "^10.0.0",
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
     "redis": "^4.0.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.3.0"
+    "rxjs": "^7.3.0",
+    "typeorm": "^0.2.41"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",

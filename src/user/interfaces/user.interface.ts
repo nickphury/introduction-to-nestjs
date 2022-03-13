@@ -3,4 +3,5 @@ export interface UserDao {
   lastName: string;
   email?: string;
   tel?: string;
+  isActive: boolean;
 }
