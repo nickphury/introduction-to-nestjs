@@ -12,6 +12,7 @@ export class UserService {
   }
 
   findAll(): Promise<User[]> {
+    console.warn('no cache');
     return this.userRepository.find();
   }
 

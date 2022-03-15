@@ -20,7 +20,7 @@ import { UserModule } from './user/user.module';
     UserModule,
     ConfigModule,
     TypeOrmModule.forRoot(),
-    CacheModule.register({ isGlobal: true }),
+    CacheModule.register({ isGlobal: true, max: 10 }),
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -36,13 +36,13 @@ export class CatsController {
 
   @Get()
   async findAll() {
-    let users: CatDto[] = null;
+    let cats: CatDto[] = null;
     try {
-      users = await this.cacheManager.get<CatDto[]>(process.env.CACHE_CATS);
-      console.warn(`from ${!users ? 'database' : 'cache'}`);
-      if (!users) {
-        users = await this.catsService.findAll();
-        await this.cacheManager.set(process.env.CACHE_CATS, users, {
+      cats = await this.cacheManager.get<CatDto[]>(process.env.CACHE_CATS);
+      console.warn(`from ${!cats ? 'database' : 'cache'}`);
+      if (!cats) {
+        cats = await this.catsService.findAll();
+        await this.cacheManager.set(process.env.CACHE_CATS, cats, {
           ttl: parseInt(process.env.CACHE_TTL, 10),
         });
       }
@@ -50,7 +50,7 @@ export class CatsController {
       console.log('[Big Problemo CatsController] : ', error);
       throw error;
     }
-    return users;
+    return cats;
   }
 
   @Get(':uuid')
