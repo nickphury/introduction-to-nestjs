@@ -7,8 +7,7 @@ import {
   ParseUUIDPipe,
   Post,
 } from '@nestjs/common';
-import { User } from 'src/decorator/user.decorator';
-import { UserDao } from './interfaces/user.interface';
+import { UserDto } from './dto/user-dto';
 import { UserService } from './user.service';
 
 @Controller('users')
@@ -16,12 +15,12 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  async create(@Body() user: UserDao) {
+  async create(@Body() user: UserDto) {
     return await this.userService.create(user);
   }
 
   @Post('many')
-  async createMany(@Body() users: UserDao[]) {
+  async createMany(@Body() users: UserDto[]) {
     return await this.userService.createMany(users);
   }
 
