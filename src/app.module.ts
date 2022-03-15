@@ -14,13 +14,22 @@ import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { ConfigModule } from './services/config/config.module';
 import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
+import * as redisStore from 'cache-manager-redis-store';
 @Module({
   imports: [
     CatsModule,
     UserModule,
     ConfigModule,
     TypeOrmModule.forRoot(),
-    CacheModule.register({ isGlobal: true, max: 10 }),
+    CacheModule.register({
+      isGlobal: true,
+      max: 10,
+      store: redisStore,
+      socket: {
+        host: process.env.HOST,
+        port: process.env.CACHE_STORE_PORT,
+      },
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
