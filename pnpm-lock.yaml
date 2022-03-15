@@ -10,6 +10,7 @@ specifiers:
   '@nestjs/testing': ^8.0.0
   '@nestjs/typeorm': ^8.0.3
   '@openapitools/openapi-generator-cli': ^2.4.13
+  '@types/cache-manager': ^3.4.3
   '@types/express': ^4.17.13
   '@types/jest': ^27.0.1
   '@types/node': ^16.0.0
@@ -17,6 +18,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^4.28.2
   '@typescript-eslint/parser': ^4.28.2
   axios: ^0.24.0
+  cache-manager: ^3.6.0
   class-transformer: ^0.4.0
   class-validator: ^0.13.2
   dotenv: ^10.0.0
@@ -41,13 +43,14 @@ specifiers:
   typescript: ^4.3.5
 
 dependencies:
-  '@nestjs/common': 8.2.5_a42814494a4c2485b312992046e91943
+  '@nestjs/common': 8.2.5_fb77e710215e389b9a2725a9b043fe3d
   '@nestjs/config': 1.2.0_4d34bcc4311a780925020c9f901d5309
   '@nestjs/core': 8.2.5_2d391bccf7bae46d184f78881868b795
   '@nestjs/platform-express': 8.2.5_dd9ef2e1e23f087665d46fe53bbbed58
   '@nestjs/typeorm': 8.0.3_fa8dda60a9697e2f31bd24497506afa8
-  '@openapitools/openapi-generator-cli': 2.4.25_f9fb82e8015b7651f5e7eb10aa6ab187
+  '@openapitools/openapi-generator-cli': 2.4.25_a050adba409b93bb5d96d6432aea863c
   axios: 0.24.0
+  cache-manager: 3.6.0
   class-transformer: 0.4.0
   class-validator: 0.13.2
   dotenv: 10.0.0
@@ -64,6 +67,7 @@ devDependencies:
   '@nestjs/cli': 8.2.0_eslint@7.32.0
   '@nestjs/schematics': 8.0.5_typescript@4.5.4
   '@nestjs/testing': 8.2.5_859bf813e0a1f12e1f364627fa1dbf9e
+  '@types/cache-manager': 3.4.3
   '@types/express': 4.17.13
   '@types/jest': 27.4.0
   '@types/node': 16.11.19
@@ -817,7 +821,7 @@ packages:
       - webpack-cli
     dev: true
 
-  /@nestjs/common/8.2.5_a42814494a4c2485b312992046e91943:
+  /@nestjs/common/8.2.5_fb77e710215e389b9a2725a9b043fe3d:
     resolution: {integrity: sha512-8VOZmHcCyhBtfvxehDfudsCrNghUoqDpZA5W8d/PUhMgz4Y1eT0M2ENBIuxr3C3j1vLypFOo30La2ymfQlOC8Q==}
     peerDependencies:
       cache-manager: '*'
@@ -834,6 +838,7 @@ packages:
         optional: true
     dependencies:
       axios: 0.24.0
+      cache-manager: 3.6.0
       class-transformer: 0.4.0
       class-validator: 0.13.2
       iterare: 1.2.1
@@ -852,7 +857,7 @@ packages:
       reflect-metadata: ^0.1.13
       rxjs: ^6.0.0 || ^7.2.0
     dependencies:
-      '@nestjs/common': 8.2.5_a42814494a4c2485b312992046e91943
+      '@nestjs/common': 8.2.5_fb77e710215e389b9a2725a9b043fe3d
       dotenv: 16.0.0
       dotenv-expand: 8.0.1
       lodash: 4.17.21
@@ -879,7 +884,7 @@ packages:
       '@nestjs/websockets':
         optional: true
     dependencies:
-      '@nestjs/common': 8.2.5_a42814494a4c2485b312992046e91943
+      '@nestjs/common': 8.2.5_fb77e710215e389b9a2725a9b043fe3d
       '@nestjs/platform-express': 8.2.5_dd9ef2e1e23f087665d46fe53bbbed58
       '@nuxtjs/opencollective': 0.3.2
       fast-safe-stringify: 2.1.1
@@ -898,7 +903,7 @@ packages:
       '@nestjs/common': ^8.0.0
       '@nestjs/core': ^8.0.0
     dependencies:
-      '@nestjs/common': 8.2.5_a42814494a4c2485b312992046e91943
+      '@nestjs/common': 8.2.5_fb77e710215e389b9a2725a9b043fe3d
       '@nestjs/core': 8.2.5_2d391bccf7bae46d184f78881868b795
       body-parser: 1.19.1
       cors: 2.8.5
@@ -951,7 +956,7 @@ packages:
         optional: true
     dependencies:
       optional: 0.1.4
-      '@nestjs/common': 8.2.5_a42814494a4c2485b312992046e91943
+      '@nestjs/common': 8.2.5_fb77e710215e389b9a2725a9b043fe3d
       '@nestjs/core': 8.2.5_2d391bccf7bae46d184f78881868b795
       '@nestjs/platform-express': 8.2.5_dd9ef2e1e23f087665d46fe53bbbed58
       tslib: 2.3.1
@@ -966,7 +971,7 @@ packages:
       rxjs: ^7.2.0
       typeorm: ^0.2.34
     dependencies:
-      '@nestjs/common': 8.2.5_a42814494a4c2485b312992046e91943
+      '@nestjs/common': 8.2.5_fb77e710215e389b9a2725a9b043fe3d
       '@nestjs/core': 8.2.5_2d391bccf7bae46d184f78881868b795
       reflect-metadata: 0.1.13
       rxjs: 7.5.2
@@ -1047,13 +1052,13 @@ packages:
       node-fetch: 2.6.6
     dev: false
 
-  /@openapitools/openapi-generator-cli/2.4.25_f9fb82e8015b7651f5e7eb10aa6ab187:
+  /@openapitools/openapi-generator-cli/2.4.25_a050adba409b93bb5d96d6432aea863c:
     resolution: {integrity: sha512-n2RExPLkscjgjryEW+SbhJNs22LHsCLIlBtD5FaZsW84tTcii2YcbyHOIfz9xAoNKbpshk2hgxjtnXqTK92mGg==}
     engines: {node: '>=10.0.0'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@nestjs/common': 8.2.5_a42814494a4c2485b312992046e91943
+      '@nestjs/common': 8.2.5_fb77e710215e389b9a2725a9b043fe3d
       '@nestjs/core': 8.2.5_2d391bccf7bae46d184f78881868b795
       '@nuxtjs/opencollective': 0.3.2
       chalk: 4.1.2
@@ -1163,6 +1168,10 @@ packages:
     dependencies:
       '@types/connect': 3.4.35
       '@types/node': 16.11.19
+    dev: true
+
+  /@types/cache-manager/3.4.3:
+    resolution: {integrity: sha512-71aBXoFYXZW4TnDHHH8gExw2lS28BZaWeKefgsiJI7QYZeJfUEbMKw6CQtzGjlYQcGIWwB76hcCrkVA3YHSvsw==}
     dev: true
 
   /@types/connect/3.4.35:
@@ -1734,6 +1743,10 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /async/3.2.0:
+    resolution: {integrity: sha512-TR2mEZFVOj2pLStYxLht7TyfuRzaydfpxr3k9RpHIzMgw7A64dzsdqCxH1WJyQdoe8T10nDXd9wnEigmiuHIZw==}
+    dev: false
+
   /asynckit/0.4.0:
     resolution: {integrity: sha1-x57Zf380y48robyXkLzDZkdLS3k=}
     dev: true
@@ -1952,6 +1965,14 @@ packages:
   /bytes/3.1.1:
     resolution: {integrity: sha512-dWe4nWO/ruEOY7HkUJ5gFt1DCFV9zPRoJr8pV0/ASQermOZjtq8jMjOprC0Kd10GLN+l7xaUPvxzJFWtxGu8Fg==}
     engines: {node: '>= 0.8'}
+    dev: false
+
+  /cache-manager/3.6.0:
+    resolution: {integrity: sha512-D4GJZhyYgprYM30ZEPOn9kkdwdPUumX3ujbNbl7FYjcRViRvAgY53k6pO/82wNsm7c4aHVgXfR12/3huA47qnA==}
+    dependencies:
+      async: 3.2.0
+      lodash: 4.17.21
+      lru-cache: 6.0.0
     dev: false
 
   /call-bind/1.0.2:

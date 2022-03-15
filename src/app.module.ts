@@ -1,4 +1,5 @@
 import {
+  CacheModule,
   MiddlewareConsumer,
   Module,
   NestModule,
@@ -14,7 +15,13 @@ import { ConfigModule } from './services/config/config.module';
 import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
 @Module({
-  imports: [CatsModule, UserModule, ConfigModule, TypeOrmModule.forRoot()],
+  imports: [
+    CatsModule,
+    UserModule,
+    ConfigModule,
+    TypeOrmModule.forRoot(),
+    CacheModule.register({ isGlobal: true }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
