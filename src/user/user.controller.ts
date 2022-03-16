@@ -1,5 +1,7 @@
 import {
   Body,
+  CacheKey,
+  CacheTTL,
   Controller,
   Delete,
   Get,
@@ -25,6 +27,8 @@ export class UserController {
   }
 
   @Get()
+  @CacheKey(process.env.CACHE_USERS)
+  @CacheTTL(parseInt(process.env.CACHE_TTL, 10))
   async findAll() {
     return await this.userService.findAll();
   }

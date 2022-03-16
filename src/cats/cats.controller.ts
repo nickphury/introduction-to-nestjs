@@ -1,14 +1,17 @@
 import {
   Body,
+  CACHE_MANAGER,
   Controller,
   Delete,
   Get,
+  Inject,
   Param,
   ParseUUIDPipe,
   Post,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+import { Cache } from 'cache-manager';
 import { CatsService } from 'src/cats/cats.service';
 import { CatDto } from 'src/cats/dto/cat.dto';
 import { Roles } from 'src/decorators/roles.decorator';
@@ -20,7 +23,10 @@ import { ValidationPipe } from 'src/pipes/validation.pipe';
 //@UseGuards(RolesGuard)
 //@UseInterceptors(LoggingInterceptor)
 export class CatsController {
-  constructor(private catsService: CatsService) {}
+  constructor(
+    private catsService: CatsService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+  ) {}
 
   @Post()
   async create(@Body(/*new ValidationPipe()*/) cat: CatDto) {
@@ -30,7 +36,21 @@ export class CatsController {
 
   @Get()
   async findAll() {
-    return await this.catsService.findAll();
+    let cats: CatDto[] = null;
+    try {
+      cats = await this.cacheManager.get<CatDto[]>(process.env.CACHE_CATS);
+      console.warn(`from ${!cats ? 'database' : 'cache'}`);
+      if (!cats) {
+        cats = await this.catsService.findAll();
+        await this.cacheManager.set(process.env.CACHE_CATS, cats, {
+          ttl: parseInt(process.env.CACHE_TTL, 10),
+        });
+      }
+    } catch (error) {
+      console.log('[Big Problemo CatsController] : ', error);
+      throw error;
+    }
+    return cats;
   }
 
   @Get(':uuid')
