@@ -8,16 +8,10 @@ import {
   Param,
   ParseUUIDPipe,
   Post,
-  UseGuards,
-  UseInterceptors,
 } from '@nestjs/common';
 import { Cache } from 'cache-manager';
-import { CatsService } from 'src/cats/cats.service';
-import { CatDto } from 'src/cats/dto/cat.dto';
-import { Roles } from 'src/decorators/roles.decorator';
-import { RolesGuard } from 'src/guards/roles.guard';
-import { LoggingInterceptor } from 'src/interceptors/logging.interceptor';
-import { ValidationPipe } from 'src/pipes/validation.pipe';
+import { CatsService } from './cats.service';
+import { CatDto } from './dto/cat.dto';
 
 @Controller('cats')
 //@UseGuards(RolesGuard)
