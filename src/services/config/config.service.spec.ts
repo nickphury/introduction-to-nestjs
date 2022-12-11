@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { CONFIG_OPTIONS } from '../../constants/config';
 import { ConfigService } from './config.service';
 
 describe('ConfigService', () => {
@@ -6,7 +7,7 @@ describe('ConfigService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ConfigService],
+      providers: [ConfigService, { provide: CONFIG_OPTIONS, useValue: {} }],
     }).compile();
 
     service = module.get<ConfigService>(ConfigService);
