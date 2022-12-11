@@ -19,7 +19,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "generate-openapi": "openapi-generator-cli generate -i src/services/swagger/swagger.yaml -g typescript-nestjs -o src/services/generated --additional-properties=supportsES6=true,npmName=restClient,npmVersion=8.0.0"
+    "generate-openapi": "openapi-generator-cli generate -i src/services/swagger/swagger.yaml -g typescript-nestjs -o src/services/generated --additional-properties=supportsES6=true,npmName=restClient,npmVersion=8.0.0",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@nestjs/common": "^8.2.5",
@@ -57,6 +58,7 @@
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^8.0.2",
     "jest": "^27.0.6",
     "prettier": "^2.3.2",
     "supertest": "^6.1.3",
