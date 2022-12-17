@@ -3,12 +3,9 @@ import { AppModule } from './app.module';
 import { TransformInterceptor } from './interceptors/transform.interceptor';
 import dotenv = require('dotenv');
 import { ValidationPipe } from '@nestjs/common';
-import { MyLoggerService } from './services/my-logger/my-logger.service';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {
-    bufferLogs: true,
-  });
+  const app = await NestFactory.create(AppModule);
   app.useGlobalInterceptors(new TransformInterceptor());
   app.useGlobalPipes(
     new ValidationPipe({
@@ -17,7 +14,6 @@ async function bootstrap() {
       transform: true,
     }),
   );
-  app.useLogger(app.get(MyLoggerService));
   dotenv.config();
   const port = process.env.PORT || 3000;
   console.warn('APP runing on port : ', port);

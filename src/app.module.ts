@@ -11,25 +11,28 @@ import { AppService } from './app.service';
 import { CatsController } from './cats/cats.controller';
 import { CatsModule } from './cats/cats.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
-import { ConfigModule } from './services/config/config.module';
 import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 import * as redisStore from 'cache-manager-redis-store';
+import type { ClientOpts } from 'redis';
+import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     CatsModule,
     UserModule,
-    ConfigModule,
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot(),
-    CacheModule.register({
+    CacheModule.register<ClientOpts>({
       isGlobal: true,
       max: 10,
       store: redisStore,
-      socket: {
-        host: process.env.HOST,
-        port: process.env.CACHE_STORE_PORT,
-      },
+      host: process.env.HOST,
+      port: process.env.CACHE_STORE_PORT,
     }),
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

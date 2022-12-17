@@ -1,14 +1,14 @@
-import { EntityRepository, getConnection, Repository } from 'typeorm';
+import { Injectable } from '@nestjs/common';
+import { DataSource, Repository } from 'typeorm';
 import { User } from './user.entity';
-
-@EntityRepository(User)
+@Injectable()
 export class UserRepository extends Repository<User> {
-  constructor() {
-    super();
+  constructor(private dataSource: DataSource) {
+    super(User, dataSource.createEntityManager());
   }
 
   public async createMany(users: User[]): Promise<void> {
-    const queryRunner = getConnection().createQueryRunner();
+    const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
@@ -18,6 +18,8 @@ export class UserRepository extends Repository<User> {
       await queryRunner.commitTransaction();
     } catch (error) {
       await queryRunner.rollbackTransaction();
+    } finally {
+      await queryRunner.release();
     }
   }
 }

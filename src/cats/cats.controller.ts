@@ -17,10 +17,7 @@ import { CatDto } from './dto/cat.dto';
 //@UseGuards(RolesGuard)
 //@UseInterceptors(LoggingInterceptor)
 export class CatsController {
-  constructor(
-    private catsService: CatsService,
-    @Inject(CACHE_MANAGER) private cacheManager: Cache,
-  ) {}
+  constructor(private catsService: CatsService) {}
 
   @Post()
   async create(@Body(/*new ValidationPipe()*/) cat: CatDto) {
@@ -32,13 +29,15 @@ export class CatsController {
   async findAll() {
     let cats: CatDto[] = null;
     try {
-      cats = await this.cacheManager.get<CatDto[]>(process.env.CACHE_CATS);
+      // cats = await this.cacheManager.get<CatDto[]>(process.env.CACHE_CATS);
       console.warn(`from ${!cats ? 'database' : 'cache'}`);
       if (!cats) {
         cats = await this.catsService.findAll();
-        await this.cacheManager.set(process.env.CACHE_CATS, cats, {
-          ttl: parseInt(process.env.CACHE_TTL, 10),
-        });
+        // await this.cacheManager.set(
+        //   process.env.CACHE_CATS,
+        //   cats,
+        //   parseInt(process.env.CACHE_TTL, 10),
+        // );
       }
     } catch (error) {
       console.log('[Big Problemo CatsController] : ', error);
