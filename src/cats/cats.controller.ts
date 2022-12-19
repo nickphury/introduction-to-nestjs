@@ -1,15 +1,12 @@
 import {
   Body,
-  CACHE_MANAGER,
   Controller,
   Delete,
   Get,
-  Inject,
   Param,
   ParseUUIDPipe,
   Post,
 } from '@nestjs/common';
-import { Cache } from 'cache-manager';
 import { CatsService } from './cats.service';
 import { CatDto } from './dto/cat.dto';
 
@@ -22,7 +19,7 @@ export class CatsController {
   @Post()
   async create(@Body(/*new ValidationPipe()*/) cat: CatDto) {
     console.warn(cat);
-    return await this.catsService.create(cat);
+    return null; //await this.catsService.create(cat);
   }
 
   @Get()

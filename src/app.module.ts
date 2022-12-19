@@ -5,7 +5,7 @@ import {
   NestModule,
   RequestMethod,
 } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsController } from './cats/cats.controller';
@@ -17,13 +17,26 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import * as redisStore from 'cache-manager-redis-store';
 import type { ClientOpts } from 'redis';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 @Module({
   imports: [
     CatsModule,
     UserModule,
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService): TypeOrmModuleOptions => ({
+        type: 'mysql',
+        host: configService.get('TYPEORM_HOST'),
+        port: +configService.get('TYPEORM_PORT'),
+        username: configService.get('TYPEORM_USERNAME'),
+        password: configService.get('TYPEORM_PASSWORD'),
+        database: configService.get('TYPEORM_DATABASE'),
+        autoLoadEntities: configService.get('TYPEORM_AUTOLOAD_ENTITIES'),
+        synchronize: configService.get('TYPEORM_SYNCHRONIZE'),
+      }),
+    }),
     CacheModule.register<ClientOpts>({
       isGlobal: true,
       max: 10,

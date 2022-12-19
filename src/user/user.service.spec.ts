@@ -1,19 +1,37 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserRepository } from './user-repository';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { DataSource } from 'typeorm';
+import { userRepositoryMockFactory } from './user.controller.spec';
+import { User } from './user.entity';
 import { UserService } from './user.service';
 
-// describe('UserService', () => {
-//   let service: UserService;
+// @ts-ignore
+export const dataSourceMockFactory: () => User<DataSource> = jest.fn(() => ({
+  createQueryRunner: jest.fn(),
+}));
 
-//   beforeEach(async () => {
-//     const module: TestingModule = await Test.createTestingModule({
-//       providers: [UserService, UserRepository],
-//     }).compile();
+describe('UserService', () => {
+  let service: UserService;
 
-//     service = module.get<UserService>(UserService);
-//   });
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        UserService,
+        {
+          provide: getRepositoryToken(User),
+          useFactory: userRepositoryMockFactory,
+        },
+        {
+          provide: DataSource,
+          useFactory: dataSourceMockFactory,
+        },
+      ],
+    }).compile();
 
-//   it('should be defined', () => {
-//     expect(service).toBeDefined();
-//   });
-// });
+    service = module.get<UserService>(UserService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
