@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-// import { UsersEntity } from './users.entity';
+import { UsersEntity } from './users.entity';
 import { UsersService } from './users.service';
 
 // @ts-ignore
-// export const repositoryUsersMockFactory: () => UsersEntity<Repository<any>> =
-//   jest.fn(() => ({
-//     findOne: jest.fn((entity) => entity),
-//     // ...
-//   }));
+export const repositoryUsersMockFactory: () => UsersEntity<Repository<any>> =
+  jest.fn(() => ({
+    findOne: jest.fn((entity) => entity),
+    // ...
+  }));
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -18,10 +18,10 @@ describe('UsersService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         UsersService,
-        // {
-        //   provide: getRepositoryToken(UsersEntity),
-        //   useFactory: repositoryUsersMockFactory,
-        // },
+        {
+          provide: getRepositoryToken(UsersEntity),
+          useFactory: repositoryUsersMockFactory,
+        },
       ],
     }).compile();
 

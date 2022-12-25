@@ -16,7 +16,6 @@ export class UserService {
   }
 
   findAll(): Promise<User[]> {
-    console.warn('no cache');
     return this.userRepository.find();
   }
 
@@ -31,7 +30,6 @@ export class UserService {
   async createMany(users: UserDto[]) {
     let usersTmp: User[] = [];
     users.forEach((user) => usersTmp.push(this.userRepository.create(user)));
-    // return this.userRepository.createMany(usersTmp);
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
