@@ -18,6 +18,8 @@ import { UsersModule } from './users/users.module';
 import * as redisStore from 'cache-manager-redis-store';
 import type { ClientOpts } from 'redis';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './auth/jwt-auth.guard';
 @Module({
   imports: [
     CatsModule,
@@ -48,7 +50,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     UsersModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
