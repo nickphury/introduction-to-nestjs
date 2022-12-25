@@ -17,7 +17,8 @@ export class CatsService {
   }
 
   findOne(id: string): Promise<Cat> {
-    return this.catRepository.findOne(id, { relations: ['user'] });
+    // id, { relations: ['user'] }
+    return this.catRepository.findOne({ where: { id }, relations: ['user'] });
   }
 
   async delete(id: string): Promise<void> {

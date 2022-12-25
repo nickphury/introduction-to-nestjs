@@ -1,4 +1,3 @@
-import { CACHE_MANAGER } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Cat } from './cat.entity';
@@ -16,13 +15,6 @@ describe('CatsController', () => {
       providers: [
         CatsService,
         { provide: getRepositoryToken(Cat), useFactory: repositoryMockFactory },
-        {
-          provide: CACHE_MANAGER,
-          useValue: {
-            get: () => 'any value',
-            set: jest.fn(),
-          },
-        },
       ],
     }).compile();
 

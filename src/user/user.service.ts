@@ -1,23 +1,26 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { UserDto } from './dto/user-dto';
-import { UserRepository } from './user-repository';
 import { User } from './user.entity';
 
 @Injectable()
 export class UserService {
-  constructor(private userRepository: UserRepository) {}
+  constructor(
+    @InjectRepository(User) private userRepository: Repository<User>,
+    private dataSource: DataSource,
+  ) {}
 
   create(user: UserDto): Promise<User> {
     return this.userRepository.save(this.userRepository.create(user));
   }
 
   findAll(): Promise<User[]> {
-    console.warn('no cache');
     return this.userRepository.find();
   }
 
   findOne(id: string): Promise<User> {
-    return this.userRepository.findOne(id);
+    return this.userRepository.findOne({ where: { id } });
   }
 
   async delete(id: string): Promise<void> {
@@ -27,6 +30,18 @@ export class UserService {
   async createMany(users: UserDto[]) {
     let usersTmp: User[] = [];
     users.forEach((user) => usersTmp.push(this.userRepository.create(user)));
-    return this.userRepository.createMany(usersTmp);
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      users.forEach(async (user) => {
+        await queryRunner.manager.save(user);
+      });
+      await queryRunner.commitTransaction();
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+    } finally {
+      await queryRunner.release();
+    }
   }
 }
