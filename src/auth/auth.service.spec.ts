@@ -1,11 +1,12 @@
 import { PassportModule } from '@nestjs/passport';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { repositoryUsersMockFactory } from '../users/users.service.spec';
-import { UsersEntity } from '../users/users.entity';
+import { repositoryUsersMockFactory } from './../users/users.service.spec';
+import { UsersEntity } from './../users/users.entity';
 import { AuthService } from './auth.service';
 import { LocalStrategy } from './local.strategy';
-import { UsersService } from '../users/users.service';
+import { UsersService } from './../users/users.service';
+import { JwtService } from '@nestjs/jwt';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -20,6 +21,7 @@ describe('AuthService', () => {
           useFactory: repositoryUsersMockFactory,
         },
         UsersService,
+        JwtService,
       ],
       imports: [PassportModule],
     }).compile();
