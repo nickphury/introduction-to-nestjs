@@ -7,10 +7,12 @@ import {
   ParseUUIDPipe,
   Post,
 } from '@nestjs/common';
+import { Roles } from '../decorators/roles.decorator';
 import { CatsService } from './cats.service';
 import { CatDto } from './dto/cat.dto';
 
 @Controller('cats')
+@Roles('user')
 //@UseGuards(RolesGuard)
 //@UseInterceptors(LoggingInterceptor)
 export class CatsController {
@@ -19,7 +21,7 @@ export class CatsController {
   @Post()
   async create(@Body(/*new ValidationPipe()*/) cat: CatDto) {
     console.warn(cat);
-    return null; //await this.catsService.create(cat);
+    return this.catsService.create(cat);
   }
 
   @Get()
