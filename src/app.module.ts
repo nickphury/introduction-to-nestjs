@@ -20,6 +20,8 @@ import type { ClientOpts } from 'redis';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { RoleModule } from './role/role.module';
+import { RoleGuard } from './role/role.guard';
 @Module({
   imports: [
     CatsModule,
@@ -48,6 +50,7 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
     }),
     AuthModule,
     UsersModule,
+    RoleModule,
   ],
   controllers: [AppController],
   providers: [
@@ -55,6 +58,10 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RoleGuard,
     },
   ],
 })

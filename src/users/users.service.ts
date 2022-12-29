@@ -26,7 +26,12 @@ export class UsersService {
   }
 
   findOne(username: string): Promise<UsersEntity | undefined> {
-    return this.usersRepository.findOne({ where: { username } });
+    return this.usersRepository.findOne({
+      where: { username },
+      relations: {
+        roles: true,
+      },
+    });
   }
 
   async delete(id: string): Promise<void> {
